@@ -2,13 +2,107 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/main.css"> 
-    <title>Casino</title>
+    <title>Libraries Ireland</title>
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="vendor/font-awesome-4.7.0/css/font-awesome.min.css">
+    <script src="assets/js/index.js"></script>
+    <script src="assets/js/common/topnav.js"></script>
+    <link rel="icon" href="assets/img/icon.png" type="image/x-icon">
 </head>
-<body>
-    
-    <script src="./assets/js/main.js"></script>
+<body class="dynamic-background-gradient">
+<header class="header">
+    <nav class="topnav" id="topnav">
+        <a href="index.html" class="logo">
+            <img src="assets/img/book-logo.svg" alt="Logo">
+        </a>
+        <a href="index.html" class="active">Home</a>
+        <a href="pages/contacts.html">Contacts</a>
+        <a href="pages/gallery.html">Gallery</a>
+        <a href="pages/spec.html">Specification</a>
+        <button class="icon" onclick="onToggleClick()"><i class="fa">&#xf0c9;</i></button>
+    </nav>
+</header>
+<main class="main">
+    <div class="wrapper">
+        <div class="wrapper__picture">
+            <picture>
+                <source media="(min-width:992px)" srcset="assets/img/library_desktop.webp">
+                <source media="(min-width:768px)" srcset="assets/img/library_laptop.jpeg">
+                <source media="(min-width:600px)" srcset="assets/img/library_mobile.jpeg">
+                <img src="assets/img/library_mobile.jpeg" alt="Flowers">
+            </picture>
+        </div>
+
+        <div class="wrapper__intro  old-library-text">
+            <h1>Welcome to Irish Public Libraries</h1>
+
+            <p>Irish public libraries are an essential part of our communities, providing a wide range of services and
+                resources to people of all ages. With a rich history dating back to the 19th century, these libraries
+                have evolved to meet the changing needs of the Irish population.</p>
+
+            <p>Today, there are numerous public libraries spread across the country, from bustling cities to picturesque
+                rural towns. These libraries offer a welcoming space for reading, learning, and cultural enrichment.
+                Visitors can explore an extensive collection of books, magazines, newspapers, and digital media.</p>
+
+            <p>Irish public libraries are an integral part of our communities, offering a wide range of services and
+                resources to residents and visitors alike. Here are some key features of Irish public libraries:</p>
+
+            <ul>
+                <li>Extensive Collection of Books and Media</li>
+                <li>Digital Resources and Internet Access</li>
+                <li>Education and Lifelong Learning Programs</li>
+                <li>Cultural Events and Exhibitions</li>
+                <li>Community Engagement and Outreach</li>
+            </ul>
+        </div>
+        <div class="wrapper__video old-library-text">
+            <iframe id="video" src="https://www.youtube.com/embed/-ZOvJVnHhY0" allowfullscreen></iframe>
+        </div>
+        <div class="wrapper__services old-library-text">
+            <h2>Library Services</h2>
+
+            <p>Irish public libraries offer a variety of services to meet the diverse needs of their patrons. Some of
+                the services include:</p>
+
+            <ul>
+                <li>Reference Assistance</li>
+                <li>Children's Storytime</li>
+                <li>Adult Literacy Programs</li>
+                <li>Computer Classes</li>
+                <li>Book Clubs</li>
+            </ul>
+
+            <br>
+
+            <p>Whether you're looking for a quiet place to read, access to educational resources, or community
+                engagement opportunities, Irish public libraries have something for everyone. Visit your local library
+                and explore the world of knowledge and culture it has to offer.</p>
+
+            <p>One of the unique features of Irish public libraries is their commitment to promoting literacy and
+                lifelong learning. They host various events and programs, including book clubs, author talks, and
+                educational workshops. Children and teenagers can participate in storytelling sessions and summer
+                reading programs that ignite their passion for books and knowledge.</p>
+
+            <p>Moreover, Irish public libraries have embraced technology, providing free access to computers and the
+                internet, ensuring that everyone can stay connected and access online resources. This digital inclusion
+                plays a vital role in bridging the digital divide in our society.</p>
+
+            <p>Whether you're a student looking for a quiet place to study, a book lover searching for the latest
+                bestseller, or a parent introducing your child to the joys of reading, Irish public libraries have
+                something to offer to everyone. Explore your local library and discover the wealth of knowledge,
+                culture, and community it brings to our beautiful island.</p>
+
+            <p>Join us in celebrating the invaluable contribution of Irish public libraries to our culture, education,
+                and society. Visit your nearest library today and embark on a journey of exploration and
+                enlightenment.</p>
+        </div>
+    </div>
+</main>
+<footer class="footer">
+    <p>
+        © 2023 Libraries Ireland, Inc. All rights reserved.
+    </p>
+</footer>
+
 </body>
 </html>

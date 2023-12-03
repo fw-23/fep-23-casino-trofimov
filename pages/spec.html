@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Libraries Ireland</title>
+    <link rel="stylesheet" href="../assets/css/spec.css">
+    <link rel="stylesheet" href="../vendor/font-awesome-4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="../assets/js/contacts.js"></script>
+    <script type="text/javascript" src="../assets/js/common/topnav.js"></script>
+    <link rel="icon" href="../assets/img/icon.png" type="image/x-icon">
+</head>
+<body class="dynamic-background-gradient">
+<header class="header">
+    <nav class="topnav" id="topnav">
+        <a href="../index.html" class="logo">
+            <img src="../assets/img/book-logo.svg" alt="Logo">
+        </a>
+        <a href="../index.html">Home</a>
+        <a href="contacts.html">Contacts</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="spec.html" class="active">Specification</a>
+        <button class="icon" onclick="onToggleClick()"><i class="fa">&#xf0c9;</i></button>
+    </nav>
+</header>
+<main class="main">
+
+    <div class="wrapper synopsis">
+        <h1>Specifikation</h1>
+        <p>
+            3 responsiva sidor, enligt diagrammen nedan.
+            Sidan fungerar på både stationära och mobila enheter.
+            Texten kan ändras från källkoden, det finns ingen admin spanel.
+        </p>
+        <div class="wrapper__picture">
+            <img src="../assets/img/spec/index.png" alt="" class="img-responsive loading">
+            <img src="../assets/img/spec/contacts.png" alt="" class="img-responsive loading">
+            <img src="../assets/img/spec/gallery.png" alt="" class="img-responsive loading">
+        </div>
+
+
+        <h1>Webbraport</h1>
+
+        <h2>Struktur</h2>
+        <p>
+            "Använd både relativa och absoluta länkar" - navigering med relativa länkar; Instagram, Facebook
+            referencer med absoluta länkar.
+        </p>
+        <p>
+            "Lagra inte fotot i större format än det presenteras" - i galleri använder jag både raw och thumbnails
+            bilder.
+            När man klickar på en bild, då använder jag fullres raw foto med loading animering (gif).
+        </p>
+        <p>
+            "Minst en ritad bild eller en ikon i png- eller gif-format" - både i bruk. Loading gif, logo i png format.
+        </p>
+
+        <h2>Stil</h2>
+
+        <p>"Länkarna bör färgsättas ... Gör det här genom att utnyttja pseudoklasser för a-selektorn i CSS-filen" - det
+            gör jag i navigeringen.</p>
+
+        <p>"Minst en länk för dessutom finnas från en bild, en ikon eller en symbol" - topnav logo fungerar på det här
+            sättet.</p>
+
+        <h2>Designmönster</h2>
+
+        <p>"Utnyttja grid eller flexbox" - använder flexbox.</p>
+
+        <h2>Iframes och responsive bilder</h2>
+
+        <p>"Bygg ett simpelt galleri" - galleri sidan och modal för preview. Raw och thumbnails versioner.</p>
+
+        <p>"Kom ihåg att inte lagra bilder i större format än vad de presenteras i, och skapa tumnaglar (thumbnails)" -
+            både i bruk.</p>
+
+        <p>"Presentera en eller fler paradbilder på nån sida av din sajt. Använd dig av html5 standartens picture tagg
+            och skapa tre bilder för olika enheter" - i bruk också.</p>
+
+        <h2>Ljud och Video</h2>
+
+        <p>"Spela in ett videoklipp av nåt intresant." - i bruk, YouTube integration. Också håller 16-9 format
+            alltid.</p>
+
+        <h2>Maps, CSS animering och SVG</h2>
+
+        <p>"Bygg in en karta" - OpenStreetMaps integration.</p>
+
+        <p>"Animera någon del av sidan genom att använda CSS3 animation" - dynamic-gradient.css och galleri.css.</p>
+
+        <p>"Rita en bild genom att använda någondera" - SVG i bruk.</p>
+
+
+        <h2>Slutsats</h2>
+
+        <p>Jag skapade några enkla sidor. Brukar använda Bootstrap för nåt simpel eller Vue.js för webapplikationer. Och
+            kan inte säga att det var roligt att göra allting med vanilla HTML, CSS och JS. Det gick 3 dagar för mig.
+            Och det var ganska lång för att jag är backend guy nu och glömde många saker.
+
+            Jag har lärt picture tag och html5canvas typ.
+
+            Använder GithubPages och simpel CD pipeline med GitHub Actions.
+            Inga integrationer, då ingen IOC, modeller osv.</p>
+
+    </div>
+</main>
+<footer class="footer">
+    <div class="footer">
+        <p>
+            © 2023 Libraries Ireland, Inc. All rights reserved.
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+@import "base.css";
+
+.wrapper {
+    background-color: white;
+}
+
+.synopsis {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.synopsis {
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.synopsis h1 {
+    margin: 0 0 20px;
+}
+
+.synopsis p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 0 10px;
+}
+
+.synopsis ul {
+    list-style-type: disc;
+    margin: 0 0 10px;
+    padding-left: 20px;
+}
+
+.synopsis a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.synopsis a:hover {
+    text-decoration: underline;
+}
+
+
+.wrapper__picture {
+    text-align: center;
+}
+
+.wrapper__picture img {
+    display: inline-block;
+    width: 30%;
+    height: 30%;
+}

@@ -1,0 +1,49 @@
+@import "base.css";
+
+.main {
+    background-image: url("../img/books-background.jpg");
+}
+
+
+
+
+.wrapper p {
+    margin: 0 0 2em 0;
+}
+
+.wrapper ul {
+    margin-left: 2em;
+}
+
+
+.wrapper__intro {
+    background-color: white;
+    padding: 25px;
+    height: fit-content;
+}
+
+.wrapper__video {
+    padding: 25px;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper__services {
+    padding: 25px;
+    height: fit-content;
+}
+
+#video {
+    width: 50vw;
+    height: calc(50vw * (9 / 16));
+    object-fit: cover;
+}
+
+.wrapper__picture picture img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+
+}

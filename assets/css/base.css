@@ -1,0 +1,57 @@
+@import "common/dynamic-gradient.css";
+@import "common/buttons.css";
+@import "common/topnav.css";
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    margin: 2em;
+}
+
+@media screen and (min-device-width: 375px) and (max-device-width: 812px) ,(max-width: 768px) {
+    .wrapper {
+        margin: 0.5em;
+    }
+}
+
+.main {
+    width: 85vw;
+    min-height: 90vh;
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1em;
+}
+
+
+.footer {
+    background-color: #eee;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.old-library-text {
+    background-image: url('../img/old-paper-texture.webp');
+    font-family: 'Old English Text', sans-serif;
+    font-size: 1em;
+    color: #8B4513;
+    text-shadow: 1px 1px 1px #000;
+    background-repeat: repeat;
+    letter-spacing: 2px;
+    line-height: 1.4;
+    border: 1px solid #8B4513;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
