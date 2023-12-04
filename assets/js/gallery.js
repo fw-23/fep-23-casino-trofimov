@@ -7,13 +7,12 @@ const captionText = document.getElementById("caption");
 
 // TODO: interface declared implicitly. Can be replaced with hashmap registry or something.
 
-for (let galleryImage of document.querySelectorAll('#gallery *')) {
-    galleryImage.onclick = function () {
-        modal.style.display = "flex";
-        modalImg.src = this.src.replace('thumbnails', 'raw');
-        captionText.innerHTML = this.alt;
-    }
-}
+
+document.querySelectorAll('#gallery *').forEach((el) => el.onclick = function () {
+    modal.style.display = "flex";
+    modalImg.src = el.src.replace('thumbnails', 'raw');
+    captionText.innerHTML = el.alt;
+})
 
 
 const span = document.getElementsByClassName("close")[0];
