@@ -211,6 +211,7 @@ function login(context) {
 function logout() {
     hideElementById('wrapper__profile')
     hideElementById('wrapper__session_timer')
+    hideElementById('wrapper__change_color')
     endSession();
 }
 

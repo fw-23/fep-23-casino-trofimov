@@ -4,7 +4,7 @@ const onToggleClick = () => {
 };
 
 DESCIPTION_BY_HREF = {
-    'index.html': 'Home', 'contacts.html': 'Contacts', 'gallery.html': 'Gallery', 'spec.html': 'Specification',
+    'index.html': 'Home', 'contacts.html': 'Contacts', 'gallery.html': 'Gallery',
 }
 
 function createMenuItem(href, text, classList = null) {

@@ -23,9 +23,9 @@
 
 
 .reg_form_container {
-    margin: auto;
     max-width: 450px;
     padding: 20px;
+    margin: 50px auto auto;
     border: 1px solid #ccc;
     background: white;
 }
@@ -112,7 +112,7 @@
 
 .wrapper__current_time {
     background-color: white;
-    padding: 10px;
+    padding: 30px;
     margin-bottom: 10px;
 }
 
