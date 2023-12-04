@@ -1,8 +1,11 @@
+let TODAY = null;
+
+
 function isClosedByDayOfWeek(day) {
     return day === 0 || day === 6;
 }
 
-function closestWorkingDayOfTheWeek(today) {
+function closestWorkingDayOfWeek(today) {
     const dayOfWeek = today.getDay();
     const daysUntilMonday = dayOfWeek === 0 ? 1 : 8 - dayOfWeek;
     const out = new Date(today);
@@ -17,7 +20,7 @@ function isOpen(today) {
     if (closed === true) {
         return {
             "open": false,
-            "willOpenAt": closestWorkingDayOfTheWeek(today)
+            "willOpenAt": closestWorkingDayOfWeek(today)
         }
     }
     return {
@@ -25,6 +28,16 @@ function isOpen(today) {
     }
 }
 
+function setToday(today) {
+    TODAY = today;
+}
+
+function getToday() {
+    return TODAY === null ? new Date() : TODAY;
+}
+
 export {
-    isOpen
+    isOpen,
+    setToday,
+    getToday,
 }

@@ -123,3 +123,20 @@
 #session_length_selector {
     width: 100%;
 }
+
+.wrapper__session_timer {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.wrapper__session_timer p {
+    margin: auto;
+}
+
+#wrapper__session_timer {
+    display: none;
+}

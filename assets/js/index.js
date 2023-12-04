@@ -1,19 +1,25 @@
-import {isOpen, setToday, getToday} from './ioc.js'
+import {isOpen, setToday, getSession, startSession, endSession} from './ioc.js'
+
+function hideElementById(id) {
+    const regFormWrapper = document.getElementById(id);
+    regFormWrapper.style.display = "none";
+}
+
+function showElementById(id, kind = 'block') {
+    const regFormWrapper = document.getElementById(id);
+    regFormWrapper.style.display = kind
+}
 
 
 function onClosed(willOpenAt) {
-    const regFormWrapper = document.getElementById('wrapper__reg_form');
-    regFormWrapper.style.display = "none";
-    const closedWrapper = document.getElementById('wrapper__closed');
-    closedWrapper.style.display = "block";
+    hideElementById('wrapper__reg_form')
+    showElementById('wrapper__closed')
     updateOpenTimer();
 }
 
 function onOpen() {
-    const closedWrapper = document.getElementById('wrapper__closed');
-    closedWrapper.style.display = "none";
-    const regFormWrapper = document.getElementById('wrapper__reg_form');
-    regFormWrapper.style.display = "block";
+    hideElementById('wrapper__closed')
+    showElementById('wrapper__reg_form')
 }
 
 function getDateTimeRepresentation(now) {
@@ -45,6 +51,18 @@ function updateCurrentTime() {
     setTimeout(updateCurrentTime, 1000);
 }
 
+function calculateTimer(date1, date2) {
+    const diff = date2 - date1;
+    let seconds = Math.floor(diff / 1000);
+    let minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    seconds %= 60;
+    minutes %= 60;
+    return {
+        "hours": hours, "seconds": seconds, "minutes": minutes
+    }
+}
+
 function updateOpenTimer() {
     let result = isOpen();
     if (result['open'] === true) {
@@ -52,15 +70,36 @@ function updateOpenTimer() {
     }
     let willOpenAt = result['willOpenAt']
     const el = document.getElementById('open_timer');
-    const diff = willOpenAt - new Date();
-    let seconds = Math.floor(diff / 1000);
-    let minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    seconds %= 60;
-    minutes %= 60;
+
+    let calculation = calculateTimer(new Date(), willOpenAt);
+    const [seconds, minutes, hours] = [calculation['seconds'], calculation['minutes'], calculation['hours']]
 
     el.innerHTML = 'Will open at: ' + getDateTimeRepresentation(willOpenAt) + '<br/>Time left: ' + getTimerRepresentation(hours, minutes, seconds);
     setTimeout(updateOpenTimer, 1000);
+}
+
+function onSessionExpire() {
+    alert('Session expired! Lets login again :)')
+    hideElementById('wrapper__session_timer')
+    endSession();
+    showElementById('wrapper__reg_form')
+}
+
+
+function updateSessionTimer() {
+    const session = getSession()
+    if (session === null || session['endsAt'] < new Date()) {
+        onSessionExpire()
+        return
+    }
+    const el = document.getElementById('session_timer');
+
+
+    let calculation = calculateTimer(new Date(), session['endsAt']);
+    const [seconds, minutes, hours] = [calculation['seconds'], calculation['minutes'], calculation['hours']]
+
+    el.innerHTML = 'Session ends at: ' + getDateTimeRepresentation(session['endsAt']) + '<br/>Time left: ' + getTimerRepresentation(hours, minutes, seconds);
+    setTimeout(updateSessionTimer, 1000);
 }
 
 
@@ -100,6 +139,13 @@ window.addEventListener('load', function () {
 });
 
 
+function onLogin() {
+    hideElementById('wrapper__reg_form')
+    showElementById('wrapper__session_timer')
+    updateSessionTimer()
+}
+
+
 function submitRegForm() {
     const firstName = document.getElementById("first_name").value;
     const lastName = document.getElementById("last_name").value;
@@ -132,7 +178,11 @@ function submitRegForm() {
         error.style.paddingBottom = '30px';
         error.innerHTML = errors.join("<br />");
         alert(errors.join('\n'))
+        return false;
     }
+
+    startSession(1)
+    onLogin();
 
     return false;
 }
