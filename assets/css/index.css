@@ -140,3 +140,15 @@
 #wrapper__session_timer {
     display: none;
 }
+
+
+.wrapper__profile {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#wrapper__profile {
+    display: none;
+}
+

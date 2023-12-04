@@ -1,23 +1,21 @@
-import {isOpen, setToday, getSession, startSession, endSession} from './ioc.js'
-
-function hideElementById(id) {
-    const regFormWrapper = document.getElementById(id);
-    regFormWrapper.style.display = "none";
-}
-
-function showElementById(id, kind = 'block') {
-    const regFormWrapper = document.getElementById(id);
-    regFormWrapper.style.display = kind
-}
+import {isOpen, setToday, getSession, startSession as baseStartSession, endSession, generateUsername} from './ioc.js'
+import {hideElementById, showElementById} from './utils/shortcuts.js'
+import {
+    getPlatform, getBrowser, getWindowSize, getResolution, getLanguage, getGeolocation,
+} from './utils/user_agent.js'
 
 
-function onClosed(willOpenAt) {
-    hideElementById('wrapper__reg_form')
+function onBecameClosed() {
+    let session = getSession()
+    if (!(session === null)) {
+        logout()
+    } else {
+        hideElementById('wrapper__reg_form')
+    }
     showElementById('wrapper__closed')
-    updateOpenTimer();
 }
 
-function onOpen() {
+function onBecameOpen() {
     hideElementById('wrapper__closed')
     showElementById('wrapper__reg_form')
 }
@@ -63,26 +61,41 @@ function calculateTimer(date1, date2) {
     }
 }
 
-function updateOpenTimer() {
+
+function updateOpenTimer(wasOpen, periodic = true) {
     let result = isOpen();
-    if (result['open'] === true) {
-        return
+    if (result['open'] === true && wasOpen === false) {
+        onBecameOpen()
     }
-    let willOpenAt = result['willOpenAt']
-    const el = document.getElementById('open_timer');
+    if (result['open'] === false && wasOpen === true) {
+        onBecameClosed()
+    }
+    if (result['open'] === false) {
+        let willOpenAt = result['willOpenAt']
+        const el = document.getElementById('open_timer');
 
-    let calculation = calculateTimer(new Date(), willOpenAt);
-    const [seconds, minutes, hours] = [calculation['seconds'], calculation['minutes'], calculation['hours']]
+        let calculation = calculateTimer(new Date(), willOpenAt);
+        const [seconds, minutes, hours] = [calculation['seconds'], calculation['minutes'], calculation['hours']]
 
-    el.innerHTML = 'Will open at: ' + getDateTimeRepresentation(willOpenAt) + '<br/>Time left: ' + getTimerRepresentation(hours, minutes, seconds);
-    setTimeout(updateOpenTimer, 1000);
+        el.innerHTML = 'Will open at: ' + getDateTimeRepresentation(willOpenAt) + '<br/>Time left: ' + getTimerRepresentation(hours, minutes, seconds);
+    }
+
+    if (periodic === true) {
+        setTimeout(function () {
+            updateOpenTimer(result['open'], true)
+        }, 1000);
+    }
+
+
 }
 
 function onSessionExpire() {
     alert('Session expired! Lets login again :)')
-    hideElementById('wrapper__session_timer')
-    endSession();
-    showElementById('wrapper__reg_form')
+    logout();
+    let open = isOpen()
+    if (open['open'] === true) {
+        showElementById('wrapper__reg_form')
+    }
 }
 
 
@@ -103,17 +116,12 @@ function updateSessionTimer() {
 }
 
 
-function checkIsOpen() {
-    let result = isOpen();
-    result['open'] === true ? onOpen() : onClosed(result['willOpenAt']);
-}
-
 window.addEventListener('load', function () {
     updateCurrentTime();
 });
 
 window.addEventListener('load', function () {
-    checkIsOpen();
+    updateOpenTimer(isOpen()['open'])
 });
 
 window.addEventListener('load', function () {
@@ -133,20 +141,71 @@ window.addEventListener('load', function () {
         if (currentToday < new Date()) {
             currentToday?.setDate(currentToday.getDate() + 7)
         }
+        let wasOpen = isOpen()['open']
         setToday(currentToday)
-        checkIsOpen()
+        updateOpenTimer(wasOpen, false)
     });
 });
 
+function refreshRegForm() {
+    const regFormError = document.getElementById("reg_form_error");
+    regFormError.style.padding = "0px";
+    regFormError.style.paddingBottom = '0px'
+    regFormError.innerHTML = '';
+}
 
-function onLogin() {
+function setRegFormResult(result) {
+    const error = document.getElementById("reg_form_result");
+    error.style.padding = "10px";
+    error.style.paddingBottom = '30px';
+    error.innerHTML = result
+}
+
+function onGeolocationShareSuccess(result, context) {
     hideElementById('wrapper__reg_form')
+    let session = startSession(context)
+    showProfile(session)
+    console.log(getPlatform())
+    console.log(getBrowser())
+    console.log(getWindowSize())
+    console.log(getResolution())
+    console.log(getLanguage())
     showElementById('wrapper__session_timer')
     updateSessionTimer()
 }
 
+function onGeolocationShareError(err, context) {
+    alert('Share geo please:)')
+}
+
+
+function login(context) {
+    getGeolocation(function (result) {
+        onGeolocationShareSuccess(result, context)
+    }, function (err) {
+        onGeolocationShareError(err, context)
+    })
+}
+
+function logout() {
+    hideElementById('wrapper__profile')
+    hideElementById('wrapper__session_timer')
+    endSession();
+}
+
+
+function startSession(context) {
+    return baseStartSession(context['expiration'], context['firstName'], context['lastName'])
+}
+
+function showProfile(session) {
+    let el = showElementById('wrapper__profile')
+    el.textContent = `Hej ${generateUsername(session['firstName'], session['lastName'])}! Sessions count: ${session['sessionCount']} `
+}
+
 
 function submitRegForm() {
+    const sessionLength = document.getElementById("session_length_selector").value;
     const firstName = document.getElementById("first_name").value;
     const lastName = document.getElementById("last_name").value;
     const age = document.getElementById("age").value;
@@ -154,11 +213,11 @@ function submitRegForm() {
 
     let errors = [];
 
-    if (firstName.length < 6) {
-        errors.push("First name should be more than 6 characters");
+    if (firstName.length < 2) {
+        errors.push("First name should be more than 2 characters");
     }
-    if (lastName.length < 6) {
-        errors.push("Last name should be more than 6 characters");
+    if (lastName.length < 2) {
+        errors.push("Last name should be more than 2 characters");
     }
 
     const ageNumeric = !isNaN(parseInt(age)) && isFinite(age);
@@ -173,16 +232,18 @@ function submitRegForm() {
     }
 
     if (errors.length > 0) {
-        const error = document.getElementById("reg_form_error");
-        error.style.padding = "10px";
-        error.style.paddingBottom = '30px';
-        error.innerHTML = errors.join("<br />");
+        setRegFormResult(errors.join("<br />"));
         alert(errors.join('\n'))
         return false;
     }
 
-    startSession(1)
-    onLogin();
+    login({
+        "expiration": sessionLength,
+        "firstName": firstName,
+        "lastName": lastName,
+        "age": ageNumeric,
+        "budget": budgetNumeric
+    });
 
     return false;
 }

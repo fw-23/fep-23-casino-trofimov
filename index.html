@@ -5,7 +5,6 @@
     <title>Libraries Ireland</title>
     <link rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="vendor/font-awesome-4.7.0/css/font-awesome.min.css">
-    <script type="module" src="assets/js/index.js"></script>
     <script src="assets/js/common/topnav.js"></script>
     <link rel="icon" href="assets/img/icon.png" type="image/x-icon">
 </head>
@@ -37,6 +36,9 @@
                 <option value="6">Saturday</option>
             </select>
         </div>
+        <div id="wrapper__profile" class="wrapper__profile rounded">
+            <div id="profile"></div>
+        </div>
         <div id="wrapper__closed" class="wrapper__closed rounded">
             <div id="open_timer"></div>
         </div>
@@ -47,7 +49,8 @@
             <form id="reg_form" name="form" method="get">
 
                 <div class="reg_form_container rounded">
-                    <div id="reg_form_error"></div>
+                    <div id="reg_form_result">
+                    </div>
                     <div class="input_field">
                         <label for="first_name">First name</label><input type="text" placeholder="John" id="first_name">
                     </div>
@@ -83,6 +86,6 @@
         © 2023 Libraries Ireland, Inc. All rights reserved.
     </p>
 </footer>
-
+<script type="module" src="assets/js/index.js"></script>
 </body>
 </html>

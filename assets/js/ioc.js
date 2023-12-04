@@ -1,5 +1,6 @@
 import * as open_time from './services/open_time.js'
 import * as user_session from './services/user_session.js'
+import * as user from './services/user.js'
 
 
 function isOpen() {
@@ -18,15 +19,18 @@ function getSession() {
     return user_session.getSession()
 }
 
-function startSession(expiration) {
-    return user_session.startSession(expiration)
+function startSession(expiration, firstName, lastName) {
+    return user_session.startSession(expiration, firstName, lastName)
 }
 
 function endSession() {
     return user_session.endSession()
 }
 
+function generateUsername(firstName, lastName) {
+    return user.generateUsername(firstName, lastName)
+}
 
 export {
-    isOpen, setToday, getToday, getSession, startSession, endSession,
+    isOpen, setToday, getToday, getSession, startSession, endSession, generateUsername
 }
