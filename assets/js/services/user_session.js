@@ -22,8 +22,13 @@ function startSession(expiration, firstName, lastName) {
         "sessionCount": sessionsCount,
         "firstName": firstName,
         "lastName": lastName,
+        "color": localStorage.getItem('preferredColor') || null
     };
     return getSession();
+}
+
+function savePreferredColor(color) {
+    localStorage.setItem('preferredColor', color)
 }
 
 function endSession() {
@@ -34,4 +39,5 @@ export {
     getSession,
     startSession,
     endSession,
+    savePreferredColor,
 }

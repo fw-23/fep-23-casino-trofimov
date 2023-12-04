@@ -1,7 +1,20 @@
-import {isOpen, setToday, getSession, startSession as baseStartSession, endSession, generateUsername} from './ioc.js'
+import {
+    endSession,
+    generateUsername,
+    getSession,
+    isOpen,
+    savePreferredColor,
+    setToday,
+    startSession as baseStartSession
+} from './ioc.js'
 import {hideElementById, showElementById} from './utils/shortcuts.js'
 import {
-    getPlatform, getBrowser, getWindowSize, getResolution, getLanguage, getGeolocation,
+    getBrowser,
+    getGeolocation,
+    getLanguage,
+    getPlatform,
+    getResolution,
+    getWindowSize,
 } from './utils/user_agent.js'
 
 
@@ -128,6 +141,10 @@ window.addEventListener('load', function () {
     document.getElementById('reg_form').onsubmit = submitRegForm;
 });
 
+window.addEventListener('load', function () {
+    document.getElementById('change_color').addEventListener('input', onColorChange);
+});
+
 
 window.addEventListener('load', function () {
     const daySelect = document.getElementById("day_selector");
@@ -164,7 +181,11 @@ function setRegFormResult(result) {
 function onGeolocationShareSuccess(result, context) {
     hideElementById('wrapper__reg_form')
     let session = startSession(context)
+    if (!(session['preferredColor'] === null)) {
+        changeColor(session['preferredColor'])
+    }
     showProfile(session)
+    showElementById('wrapper__change_color')
     console.log(getPlatform())
     console.log(getBrowser())
     console.log(getWindowSize())
@@ -246,4 +267,15 @@ function submitRegForm() {
     });
 
     return false;
+}
+
+function changeColor(color) {
+    document.body.style.backgroundImage = 'none'
+    document.body.style.backgroundColor = color;
+    savePreferredColor(color)
+}
+
+function onColorChange() {
+    let color = document.getElementById('color_input').value
+    changeColor(color)
 }

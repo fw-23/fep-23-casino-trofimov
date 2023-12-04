@@ -31,6 +31,10 @@ function generateUsername(firstName, lastName) {
     return user.generateUsername(firstName, lastName)
 }
 
+function savePreferredColor(color) {
+    return user_session.savePreferredColor(color)
+}
+
 export {
-    isOpen, setToday, getToday, getSession, startSession, endSession, generateUsername
+    isOpen, setToday, getToday, getSession, startSession, endSession, generateUsername, savePreferredColor
 }

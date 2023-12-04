@@ -23,13 +23,9 @@
 
 
 .reg_form_container {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    margin: auto;
     max-width: 450px;
     padding: 20px;
-    width: 500px;
     border: 1px solid #ccc;
     background: white;
 }
@@ -152,3 +148,13 @@
     display: none;
 }
 
+.wrapper__change_color {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#wrapper__change_color {
+    display: none;
+    margin-bottom: auto;
+}
