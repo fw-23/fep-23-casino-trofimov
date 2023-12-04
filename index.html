@@ -24,7 +24,7 @@
 </header>
 <main class="main">
     <div class="wrapper">
-        <div id="wrapper__current_time" class="wrapper__current_time">
+        <div id="wrapper__current_time" class="wrapper__current_time rounded">
             <div id="current_time"></div>
             <label for="day_selector">Select a day:</label>
             <select id="day_selector">
@@ -37,25 +37,40 @@
                 <option value="6">Saturday</option>
             </select>
         </div>
-        <div id="wrapper__closed" class="wrapper__closed">
+        <div id="wrapper__closed" class="wrapper__closed rounded">
             <div id="open_timer"></div>
         </div>
         <div id='wrapper__reg_form' class="wrapper__reg_form">
-            <div id="reg_form_error"></div>
-            <form id="reg_form" name="form" method="get">
-                <div class="input_field">
-                    <label for="first_name">First name</label><input type="text" placeholder="John" id="first_name">
+            <form id="reg_form" name="form" method="post">
+
+                <div class="reg_form_container rounded">
+                    <div id="reg_form_error"></div>
+                    <div class="input_field">
+                        <label for="first_name">First name</label><input type="text" placeholder="John" id="first_name">
+                    </div>
+                    <div class="input_field">
+                        <label for="last_name">Last name</label><input type="text" placeholder="Smith" id="last_name">
+                    </div>
+                    <div class="input_field">
+                        <label for="age">Age</label><input type="password" placeholder="99" id="age">
+                    </div>
+                    <div class="input_field">
+                        <label for="budget">Budget</label><input type="text" placeholder="Will spend 100k" id="budget">
+                    </div>
+                    <label for="session_length_selector">
+                        Session:
+                    </label>
+                    <select id="session_length_selector">
+                        <option selected value="30">30 min</option>
+                        <option value="60">60 min</option>
+                        <option value="90">90 min</option>
+                        <option value="120">120 min</option>
+                    </select>
+
+                    <div class="clearfix">
+                        <button type="submit" class="btn">Sign Up</button>
+                    </div>
                 </div>
-                <div class="input_field">
-                    <label for="last_name">Last name</label><input type="text" placeholder="Smith" id="last_name">
-                </div>
-                <div class="input_field">
-                    <label for="age">Age</label><input type="password" placeholder="99" id="age">
-                </div>
-                <div class="input_field">
-                    <label for="budget">Budget</label><input type="text" placeholder="Will spend 100k" id="budget">
-                </div>
-                <input type="submit" value="submit">
             </form>
         </div>
     </div>

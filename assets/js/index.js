@@ -6,7 +6,7 @@ function onClosed(willOpenAt) {
     regFormWrapper.style.display = "none";
     const closedWrapper = document.getElementById('wrapper__closed');
     closedWrapper.style.display = "block";
-    updateOpenTimer(willOpenAt);
+    updateOpenTimer();
 }
 
 function onOpen() {
@@ -45,7 +45,12 @@ function updateCurrentTime() {
     setTimeout(updateCurrentTime, 1000);
 }
 
-function updateOpenTimer(willOpenAt) {
+function updateOpenTimer() {
+    let result = isOpen();
+    if (result['open'] === true) {
+        return
+    }
+    let willOpenAt = result['willOpenAt']
     const el = document.getElementById('open_timer');
     const diff = willOpenAt - new Date();
     let seconds = Math.floor(diff / 1000);
@@ -55,9 +60,7 @@ function updateOpenTimer(willOpenAt) {
     minutes %= 60;
 
     el.innerHTML = 'Will open at: ' + getDateTimeRepresentation(willOpenAt) + '<br/>Time left: ' + getTimerRepresentation(hours, minutes, seconds);
-    setTimeout(function () {
-        updateOpenTimer(willOpenAt)
-    }, 1000);
+    setTimeout(updateOpenTimer, 1000);
 }
 
 
@@ -123,11 +126,13 @@ function submitRegForm() {
         errors.push('Age must be 18 or older')
     }
 
-    if (errors) {
+    if (errors.length > 0) {
         const error = document.getElementById("reg_form_error");
         error.style.padding = "10px";
+        error.style.paddingBottom = '30px';
         error.innerHTML = errors.join("<br />");
+        alert(errors.join('\n'))
     }
-    alert(errors.join('\n'))
+
     return false;
 }
