@@ -12069,7 +12069,7 @@
   		maxZoom: 18,
 
   		// @option subdomains: String|String[] = 'abc'
-  		// Subdomains of the tile service. Can be passed in the form of one string (where each letter is a subdomain name) or an array of strings.
+  		// Subdomains of the tile services. Can be passed in the form of one string (where each letter is a subdomain name) or an array of strings.
   		subdomains: 'abc',
 
   		// @option errorTileUrl: String = ''
@@ -12349,11 +12349,11 @@
   		format: 'image/jpeg',
 
   		// @option transparent: Boolean = false
-  		// If `true`, the WMS service will return images with transparency.
+  		// If `true`, the WMS services will return images with transparency.
   		transparent: false,
 
   		// @option version: String = '1.1.1'
-  		// Version of the WMS service to use
+  		// Version of the WMS services to use
   		version: '1.1.1'
   	},
 
@@ -12434,7 +12434,7 @@
 
 
   // @factory L.tileLayer.wms(baseUrl: String, options: TileLayer.WMS options)
-  // Instantiates a WMS tile layer object given a base URL of the WMS service and a WMS parameters/options object.
+  // Instantiates a WMS tile layer object given a base URL of the WMS services and a WMS parameters/options object.
   function tileLayerWMS(url, options) {
   	return new TileLayerWMS(url, options);
   }

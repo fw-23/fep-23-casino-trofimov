@@ -25,6 +25,7 @@
     background-color: papayawhip;
     padding: 25px;
     border-radius: 5%;
+    display: none;
 }
 
 .wrapper__reg_form h2 {
@@ -63,4 +64,26 @@
     text-align: center;
     font-size: 14px;
     transition: all 0.5s ease;
+}
+
+.wrapper__closed {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    text-align: center;
+}
+
+.wrapper__closed p {
+    margin: auto;
+}
+
+#wrapper__closed {
+    display: none;
+}
+
+.wrapper__current_time {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
 }

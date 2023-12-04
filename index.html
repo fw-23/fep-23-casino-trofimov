@@ -5,7 +5,7 @@
     <title>Libraries Ireland</title>
     <link rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="vendor/font-awesome-4.7.0/css/font-awesome.min.css">
-    <script src="assets/js/index.js"></script>
+    <script type="module" src="assets/js/index.js"></script>
     <script src="assets/js/common/topnav.js"></script>
     <link rel="icon" href="assets/img/icon.png" type="image/x-icon">
 </head>
@@ -24,9 +24,25 @@
 </header>
 <main class="main">
     <div class="wrapper">
-        <div class="wrapper__reg_form">
-            <div id="registration_form_error"></div>
-            <form id="registration_form" name="form" onsubmit="return val();" method="get">
+        <div id="wrapper__current_time" class="wrapper__current_time">
+            <div id="current_time"></div>
+            <label for="day_selector">Select a day:</label>
+            <select id="day_selector">
+                <option value="0">Sunday</option>
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6">Saturday</option>
+            </select>
+        </div>
+        <div id="wrapper__closed" class="wrapper__closed">
+            <div id="open_timer"></div>
+        </div>
+        <div id='wrapper__reg_form' class="wrapper__reg_form">
+            <div id="reg_form_error"></div>
+            <form id="reg_form" name="form" method="get">
                 <div class="input_field">
                     <label for="first_name">First name</label><input type="text" placeholder="John" id="first_name">
                 </div>
@@ -43,7 +59,6 @@
             </form>
         </div>
     </div>
-    <script type="text/javascript" src="assets/js/index.js"></script>
 </main>
 <footer class="footer">
     <p>
