@@ -37,6 +37,7 @@ h1 {
 
 #wrapper__game {
     display: none;
+    transition: 0.5s;
 }
 
 #game_items {

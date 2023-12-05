@@ -1,5 +1,5 @@
-function isWinner(lostInARow) {
-    return lostInARow === 3;
+function isWinner(lostInARow, bet, budget) {
+    return (lostInARow > 3) && (bet / budget) < 0.10;
 }
 
 

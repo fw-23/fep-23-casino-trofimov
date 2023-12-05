@@ -42,7 +42,12 @@ let GAME_ITEMS = [
     }
 ]
 
-function play() {
+function updateResultColor(won, button) {
+    let gameWrapper = document.getElementById('wrapper__game')
+    gameWrapper.style.background = won === true ? '#90EE90' : '#FFCCCB';
+}
+
+function play(event) {
     let bet = document.getElementById('bet_amount_input').value
     bet = parseFloat(bet)
     if (isNaN(bet) || bet == null || bet <= 0) {
@@ -55,7 +60,10 @@ function play() {
         alert('No enough money :(')
         return
     }
-    let won = isRpsGameWinner(session['lostInARow'])
+    let won = isRpsGameWinner(session['lostInARow'], bet, session['budget'])
+
+    updateResultColor(won, event.target)
+
     session = addRpcGameRecord(bet, won)
     showProfile(session)
     if (session['budget'] === 0) {

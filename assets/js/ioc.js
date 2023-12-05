@@ -56,8 +56,8 @@ function addRpcGameRecord(bet, won) {
 }
 
 
-function isRpsGameWinner(lostInARow) {
-    return rps.isWinner(lostInARow)
+function isRpsGameWinner(lostInARow, bet, budget) {
+    return rps.isWinner(lostInARow, bet, budget)
 }
 
 export {
