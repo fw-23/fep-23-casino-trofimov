@@ -16,6 +16,10 @@ LINKS = [
         "href": "gallery.html",
         "title": "Gallery"
     },
+    {
+        "href": "rps.html",
+        "title": "RPS"
+    }
 ]
 
 function createMenuItem(href, text, classList = null) {

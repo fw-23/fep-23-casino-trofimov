@@ -1,0 +1,31 @@
+@import "base.css";
+
+.wrapper p {
+    margin: 0 0 2em 0;
+}
+
+.wrapper ul {
+    margin-left: 2em;
+}
+
+
+h1 {
+    font-family: Satisfy, serif;
+    font-size: 50px;
+    text-align: center;
+    color: black;
+    padding: 1%;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper__login_required {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+

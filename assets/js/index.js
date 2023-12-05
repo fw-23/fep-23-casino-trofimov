@@ -227,7 +227,7 @@ function startSession(context) {
 
 function showProfile(session) {
     let el = showElementById('wrapper__profile')
-    el.textContent = `Hej ${generateUsername(session['firstName'], session['lastName'])}! Sessions count: ${session['sessionCount']} `
+    el.textContent = `Hej ${generateUsername(session['firstName'], session['lastName'])}! Sessions count: ${session['sessionCount']} Current budget: ${session['budget']}`
 }
 
 
@@ -268,8 +268,8 @@ function submitRegForm() {
         "expiration": sessionLength,
         "firstName": firstName,
         "lastName": lastName,
-        "age": ageNumeric,
-        "budget": budgetNumeric
+        "age": parseInt(age),
+        "budget": parseInt(budget),
     });
 
     return false;
