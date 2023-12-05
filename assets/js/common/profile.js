@@ -3,7 +3,8 @@ import {generateUsername, savePreferredColor} from "../ioc.js";
 
 function showProfile(firstName, lastName, sessionCount, budget) {
     let el = showElementById('wrapper__profile')
-    el.textContent = `Hej ${generateUsername(firstName, lastName)}! Sessions count: ${sessionCount} Current budget: ${budget}`
+    let lines = [`Hej ${generateUsername(firstName, lastName)}!`, `Sessions count: ${sessionCount}`, `Current budget: ${budget / 100}`]
+    el.innerHTML = lines.join('<br/>')
 }
 
 function hideProfile(profileElId, sessionTimerElId, changeColorId) {

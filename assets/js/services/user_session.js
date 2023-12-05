@@ -51,7 +51,7 @@ function endSession() {
     localStorage.removeItem('session')
 }
 
-function addRpcGameRecord(bet, won) {
+function addRpsGameRecord(bet, won) {
     let session = getSession()
     if (session === null) {
         return
@@ -73,5 +73,5 @@ export {
     startSession,
     endSession,
     savePreferredColor,
-    addRpcGameRecord,
+    addRpsGameRecord,
 }

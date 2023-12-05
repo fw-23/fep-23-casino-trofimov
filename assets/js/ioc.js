@@ -52,7 +52,7 @@ function updateSessionTimer(getSession, onSessionExpire, elId) {
 }
 
 function addRpcGameRecord(bet, won) {
-    return user_session.addRpcGameRecord(bet, won)
+    return user_session.addRpsGameRecord(bet, won)
 }
 
 

@@ -141,8 +141,14 @@ function startLogin(context) {
     })
 }
 
+function resetColor() {
+    document.body.attributeStyleMap.delete('background-image')
+    document.body.attributeStyleMap.delete('background-color')
+}
+
 function logout() {
     hideProfile('wrapper__profile', 'wrapper__session_timer', 'wrapper__change_color')
+    resetColor()
     endSession();
 }
 
@@ -197,7 +203,7 @@ function submitRegForm() {
         "firstName": firstName,
         "lastName": lastName,
         "age": parseInt(age),
-        "budget": parseInt(budget),
+        "budget": parseFloat(budget) * 100,
     });
 
     return false;

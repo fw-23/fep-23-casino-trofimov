@@ -44,11 +44,12 @@ let GAME_ITEMS = [
 
 function play() {
     let bet = document.getElementById('bet_amount_input').value
-    bet = parseInt(bet)
-    if (isNaN(bet) || bet == null) {
+    bet = parseFloat(bet)
+    if (isNaN(bet) || bet == null || bet <= 0) {
         alert('Please provide correct bet!')
         return
     }
+    bet = Math.round(bet * 100)
     let session = getSession()
     if (bet > session['budget']) {
         alert('No enough money :(')
@@ -56,7 +57,7 @@ function play() {
     }
     let won = isRpsGameWinner(session['lostInARow'])
     session = addRpcGameRecord(bet, won)
-    showProfile(session)
+    show(session)
     if (session['budget'] === 0) {
         endSession()
         onSessionExpire()
@@ -86,7 +87,7 @@ function initGameSession() {
 
 
 window.addEventListener('load', function () {
-    initGameSession()
+    initGameProfileSession()
 })
 
 
