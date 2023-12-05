@@ -55,15 +55,13 @@ h1 {
 }
 
 .game_item {
-    display: inline-block;
-    margin-right: 25px;
-    margin-left: 25px;
+    display: flex;
+    justify-content: center;
 }
 
 .game_item img {
-    width: auto;
-    height: 100%;
-    max-width: 100px;
+    width: 100px;
+    height: 100px;
     margin: 15px;
     object-fit: contain
 }
