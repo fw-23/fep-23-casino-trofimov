@@ -164,12 +164,13 @@ window.addEventListener('load', function () {
     });
 });
 
-function refreshRegForm() {
-    const regFormError = document.getElementById("reg_form_error");
-    regFormError.style.padding = "0px";
-    regFormError.style.paddingBottom = '0px'
-    regFormError.innerHTML = '';
-}
+window.addEventListener('load', function () {
+    let session = getSession()
+    if (!(session === null)) {
+        onLogin(session)
+    }
+})
+
 
 function setRegFormResult(result) {
     const error = document.getElementById("reg_form_result");
@@ -179,8 +180,12 @@ function setRegFormResult(result) {
 }
 
 function onGeolocationShareSuccess(result, context) {
-    hideElementById('wrapper__reg_form')
     let session = startSession(context)
+    onLogin(session)
+}
+
+function onLogin(session) {
+    hideElementById('wrapper__reg_form')
     if (!(session['preferredColor'] === null)) {
         changeColor(session['preferredColor'])
     }
@@ -200,7 +205,7 @@ function onGeolocationShareError(err, context) {
 }
 
 
-function login(context) {
+function loginStart(context) {
     getGeolocation(function (result) {
         onGeolocationShareSuccess(result, context)
     }, function (err) {
@@ -259,7 +264,7 @@ function submitRegForm() {
         return false;
     }
 
-    login({
+    loginStart({
         "expiration": sessionLength,
         "firstName": firstName,
         "lastName": lastName,
@@ -274,6 +279,8 @@ function changeColor(color) {
     document.body.style.backgroundImage = 'none'
     document.body.style.backgroundColor = color;
     savePreferredColor(color)
+    console.log('saved')
+    console.log(getSession())
 }
 
 function onColorChange() {

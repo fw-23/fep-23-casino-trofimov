@@ -19,8 +19,8 @@ function getSession() {
     return user_session.getSession()
 }
 
-function startSession(expiration, firstName, lastName) {
-    return user_session.startSession(expiration, firstName, lastName)
+function startSession(expiration, firstName, lastName, budget) {
+    return user_session.startSession(expiration, firstName, lastName, budget)
 }
 
 function endSession() {

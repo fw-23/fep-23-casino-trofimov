@@ -1,10 +1,14 @@
-let SESSION = null;
-
 function getSession() {
-    return structuredClone(SESSION);
+    let out = JSON.parse(localStorage.getItem('session'))
+    if (out === null) {
+        return null;
+    }
+    out['endsAt'] = new Date(out['endsAt'])
+    out['preferredColor'] = getPreferredColor()
+    return out
 }
 
-function startSession(expiration, firstName, lastName) {
+function startSession(expiration, firstName, lastName, budget) {
     let sessionsCount = localStorage.getItem("sessionCount");
     if (sessionsCount === null) {
         localStorage.setItem('sessionCount', '1')
@@ -13,26 +17,33 @@ function startSession(expiration, firstName, lastName) {
         sessionsCount = parseInt(sessionsCount) + 1
         localStorage.setItem('sessionCount', sessionsCount.toString())
     }
-    console.log(sessionsCount)
-    if (!(SESSION === null)) {
-        return
+    let session = getSession()
+
+    if (!(session === null)) {
+        return session
     }
-    SESSION = {
+    session = {
         "endsAt": new Date(new Date().getTime() + expiration * 1000),
         "sessionCount": sessionsCount,
         "firstName": firstName,
         "lastName": lastName,
-        "color": localStorage.getItem('preferredColor') || null
+        "budget": budget,
     };
-    return getSession();
+    localStorage.setItem('session', JSON.stringify(session))
+    session['preferredColor'] = getPreferredColor()
+    return session
 }
 
 function savePreferredColor(color) {
     localStorage.setItem('preferredColor', color)
 }
 
+function getPreferredColor() {
+    return localStorage.getItem('preferredColor')
+}
+
 function endSession() {
-    SESSION = null;
+    localStorage.removeItem('session')
 }
 
 export {
