@@ -52,4 +52,5 @@ div#memory_board > div {
     padding: 24px;
     text-align: center;
     color: white;
+    transition: 0.5s ease;
 }
