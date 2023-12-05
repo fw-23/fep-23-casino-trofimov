@@ -43,7 +43,7 @@ body {
 }
 
 .old-library-text {
-    background-image: url('../img/old-paper-texture.webp');
+    background-color: white;
     font-family: 'Old English Text', sans-serif;
     font-size: 1em;
     color: #8B4513;
