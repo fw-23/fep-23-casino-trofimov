@@ -1,3 +1,5 @@
+Production env: https://fw-23.github.io/fep-23-casino-trofimov/index.html
+
 # Stomme för Casinoprojektet
 
 ### Katalogstruktur:
