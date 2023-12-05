@@ -222,7 +222,7 @@ function logout() {
 
 
 function startSession(context) {
-    return baseStartSession(context['expiration'], context['firstName'], context['lastName'])
+    return baseStartSession(context['expiration'], context['firstName'], context['lastName'], context['budget'])
 }
 
 function showProfile(session) {
@@ -279,8 +279,6 @@ function changeColor(color) {
     document.body.style.backgroundImage = 'none'
     document.body.style.backgroundColor = color;
     savePreferredColor(color)
-    console.log('saved')
-    console.log(getSession())
 }
 
 function onColorChange() {
