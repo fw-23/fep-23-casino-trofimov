@@ -3,7 +3,7 @@ import {generateUsername, savePreferredColor} from "../ioc.js";
 
 function showProfile(firstName, lastName, sessionCount, budget) {
     let el = showElementById('wrapper__profile')
-    let lines = [`Hej ${generateUsername(firstName, lastName)}!`, `Sessions count: ${sessionCount}`, `Current budget: ${budget / 100}`]
+    let lines = [`Hej ${generateUsername(firstName, lastName)}!`, `Session count: ${sessionCount}`, `Current budget: ${budget / 100}`]
     el.innerHTML = lines.join('<br/>')
 }
 
