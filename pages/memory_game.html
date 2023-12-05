@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Libraries Ireland</title>
+    <link rel="stylesheet" href="../assets/css/memory_game.css">
+    <link rel="stylesheet" href="../vendor/font-awesome-4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="../assets/js/common/topnav.js"></script>
+    <link rel="icon" href="../assets/img/icon.png" type="image/x-icon">
+</head>
+<body class="dynamic-background-gradient">
+<header class="header">
+    <nav class="topnav" id="topnav">
+        <a href="../index.html" class="logo">
+            <img src="../assets/img/casino-logo.png" alt="Logo">
+        </a>
+        <button class="icon" onclick="onToggleClick()"><i class="fa">&#xf0c9;</i></button>
+    </nav>
+</header>
+<main class="main">
+    <div class="wrapper">
+        <div id="wrapper__profile" class="wrapper__profile rounded">
+            <div id="profile"></div>
+        </div>
+        <div id="wrapper__session_timer" class="wrapper__session_timer rounded">
+            <div id="session_timer"></div>
+        </div>
+        <div id="wrapper__login_required" class="wrapper__login_required rounded">
+            <div id="login_required">Please login first!</div>
+        </div>
+        <div id="wrapper__game" class="wrapper__game rounded">
+            <div id="game">
+                <div id="memory_board"></div>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+<footer class="footer">
+    <p>
+        © 2023 Libraries Ireland, Inc. All rights reserved.
+    </p>
+</footer>
+<script type="module" src="../assets/js/memory_game.js"></script>
+</body>
+</html>

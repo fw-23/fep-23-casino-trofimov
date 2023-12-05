@@ -39,39 +39,17 @@ h1 {
     display: none;
 }
 
-#game_items {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#memory_board {
+    text-align: center;
 }
 
-#game {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.game_item {
+div#memory_board > div {
     display: inline-block;
-    margin-right: 25px;
-    margin-left: 25px;
-}
-
-.game_item img {
-    width: auto;
-    height: 100%;
-    max-width: 100px;
-    margin: 15px;
-    object-fit: contain
-}
-
-#bet_input {
-    width: 50%;
-}
-
-#bet_amount_input {
-    width: 100%;
+    border: darkcyan 1px solid;
+    width: 71px;
+    height: 71px;
+    margin: 10px;
+    padding: 24px;
+    text-align: center;
+    color: white;
 }

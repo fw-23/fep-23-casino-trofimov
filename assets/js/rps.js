@@ -1,12 +1,11 @@
 import {hideElementById, showElementById} from './utils/shortcuts.js'
 import {
     getSession,
-    isOpen, savePreferredColor,
-    updateCurrentTime,
-    updateOpenTimer as baseUpdateOpenTimer,
+    savePreferredColor,
     updateSessionTimer,
     isRpsGameWinner,
-    addRpcGameRecord, endSession,
+    addRpcGameRecord,
+    endSession,
 } from "./ioc.js";
 import {showProfile as baseShowProfile} from "./common/profile.js";
 
