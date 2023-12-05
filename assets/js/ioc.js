@@ -3,7 +3,8 @@ import * as user_session from './services/user_session.js'
 import * as user from './services/user.js'
 import * as current_time from "./services/current_time.js";
 import * as open_timer from "./services/open_timer.js";
-import * as session_timer from "./services/session_timer.js";
+import * as session_timer from "./services/user_session_timer.js";
+import * as rps from "./services/rps.js";
 
 
 function isOpen() {
@@ -50,6 +51,15 @@ function updateSessionTimer(getSession, onSessionExpire, elId) {
     return session_timer.updateSessionTimer(getSession, onSessionExpire, elId)
 }
 
+function addRpcGameRecord(bet, won) {
+    return user_session.addRpcGameRecord(bet, won)
+}
+
+
+function isRpsGameWinner(lostInARow) {
+    return rps.isWinner(lostInARow)
+}
+
 export {
     isOpen,
     setToday,
@@ -62,4 +72,6 @@ export {
     updateCurrentTime,
     updateOpenTimer,
     updateSessionTimer,
+    addRpcGameRecord,
+    isRpsGameWinner,
 }

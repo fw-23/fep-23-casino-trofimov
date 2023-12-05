@@ -9,6 +9,10 @@
     margin-left: 2em;
 }
 
+.main {
+    min-width: 625px;
+}
+
 
 h1 {
     font-family: Satisfy, serif;
@@ -18,11 +22,6 @@ h1 {
     padding: 1%;
 }
 
-.main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .wrapper__login_required {
     background-color: white;
@@ -30,3 +29,48 @@ h1 {
     margin-bottom: 10px;
 }
 
+.wrapper__game {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#wrapper__game {
+    display: none;
+}
+
+#game_items {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#game {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.game_item {
+    display: inline-block;
+    margin-right: 25px;
+    margin-left: 25px;
+}
+
+.game_item img {
+    height: 100px;
+    width: 100px;
+    margin: 15px;
+    object-fit: contain
+}
+
+#bet_input {
+    width: 50%;
+}
+
+#bet_amount_input {
+    width: 100%;
+}

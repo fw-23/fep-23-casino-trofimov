@@ -8,6 +8,10 @@ function getSession() {
     return out
 }
 
+function setSession(session) {
+    localStorage.setItem('session', JSON.stringify(session))
+}
+
 function startSession(expiration, firstName, lastName, budget) {
     let sessionsCount = localStorage.getItem("sessionCount");
     if (sessionsCount === null) {
@@ -28,8 +32,9 @@ function startSession(expiration, firstName, lastName, budget) {
         "firstName": firstName,
         "lastName": lastName,
         "budget": budget,
+        "lostInARow": 0,
     };
-    localStorage.setItem('session', JSON.stringify(session))
+    setSession(session)
     session['preferredColor'] = getPreferredColor()
     return session
 }
@@ -46,9 +51,27 @@ function endSession() {
     localStorage.removeItem('session')
 }
 
+function addRpcGameRecord(bet, won) {
+    let session = getSession()
+    if (session === null) {
+        return
+    }
+    if (won === true) {
+        session['lostInARow'] = 0
+        session['budget'] = session['budget'] + bet * 2
+    } else {
+        session['lostInARow'] = session['lostInARow'] + 1
+        session['budget'] = session['budget'] - bet
+    }
+    setSession(session)
+    return session
+}
+
+
 export {
     getSession,
     startSession,
     endSession,
     savePreferredColor,
+    addRpcGameRecord,
 }

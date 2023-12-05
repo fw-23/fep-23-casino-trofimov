@@ -1,9 +1,3 @@
-.dynamic-background-gradient {
-    background: linear-gradient(270deg, #FBF2C0, #C06E52);
-    background-size: 400% 400%;
-    animation: DynamicGradient 30s ease infinite;
-}
-
 @keyframes DynamicGradient {
     0% {
         background-position: 0 50%

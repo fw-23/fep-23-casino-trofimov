@@ -19,6 +19,13 @@ body {
     margin: 2em;
 }
 
+
+.dynamic-background-gradient {
+    background: linear-gradient(270deg, #FBF2C0, #C06E52);
+    background-size: 400% 400%;
+    animation: DynamicGradient 30s ease infinite;
+}
+
 @media screen and (min-device-width: 375px) and (max-device-width: 812px) ,(max-width: 768px) {
     .wrapper {
         margin: 0.5em;

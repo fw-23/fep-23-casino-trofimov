@@ -108,7 +108,7 @@ function setRegFormResult(result) {
 }
 
 function onGeolocationShareSuccess(result, context) {
-    let session = startSession(context['expiration'], context['firstName'], context['lastName'], context['budget'])
+    let session = startSession(context['expiration'] * 60, context['firstName'], context['lastName'], context['budget'])
     onLogin(session)
 }
 
