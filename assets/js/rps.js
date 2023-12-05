@@ -57,7 +57,7 @@ function play() {
     }
     let won = isRpsGameWinner(session['lostInARow'])
     session = addRpcGameRecord(bet, won)
-    show(session)
+    showProfile(session)
     if (session['budget'] === 0) {
         endSession()
         onSessionExpire()
@@ -82,12 +82,11 @@ function initGameSession() {
     GAME_ITEMS.forEach(function (element) {
         gameItemsDiv.appendChild(createGameItemDiv(element['name'], element['img']))
     })
-    return {}
 }
 
 
 window.addEventListener('load', function () {
-    initGameProfileSession()
+    initGameSession()
 })
 
 

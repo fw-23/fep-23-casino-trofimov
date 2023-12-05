@@ -1,5 +1,5 @@
 import {hideElementById, showElementById} from "../utils/shortcuts.js";
-import {generateUsername, savePreferredColor} from "../ioc.js";
+import {generateUsername} from "../ioc.js";
 
 function showProfile(firstName, lastName, sessionCount, budget) {
     let el = showElementById('wrapper__profile')
