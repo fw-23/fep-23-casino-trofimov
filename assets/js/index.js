@@ -1,21 +1,20 @@
 import {
     endSession,
-    generateUsername,
     getSession,
     isOpen,
     savePreferredColor,
     setToday,
-    startSession as baseStartSession
+    updateCurrentTime,
+    updateSessionTimer,
+    startSession,
+    updateOpenTimer as baseUpdateOpenTimer,
 } from './ioc.js'
 import {hideElementById, showElementById} from './utils/shortcuts.js'
 import {
-    getBrowser,
-    getGeolocation,
-    getLanguage,
-    getPlatform,
-    getResolution,
-    getWindowSize,
+    getBrowser, getGeolocation, getLanguage, getPlatform, getResolution, getWindowSize,
 } from './utils/user_agent.js'
+import {hideProfile, showProfile} from "./common/profile.js";
+import {calculateTimer, getDateTimeRepresentation, getTimerRepresentation} from "./common/repr.js";
 
 
 function onBecameClosed() {
@@ -33,73 +32,9 @@ function onBecameOpen() {
     showElementById('wrapper__reg_form')
 }
 
-function getDateTimeRepresentation(now) {
-    const options = {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        timeZoneName: 'short'
-    };
-
-    return now.toLocaleDateString('en-US', options);
-}
-
-function getTimerRepresentation(hours, minutes, seconds) {
-    hours = (hours < 10) ? '0' + hours : hours;
-    minutes = (minutes < 10) ? '0' + minutes : minutes;
-    seconds = (seconds < 10) ? '0' + seconds : seconds;
-    return hours + 'h ' + minutes + 'm ' + seconds + 's ';
-}
-
-function updateCurrentTime() {
-    const el = document.getElementById('current_time');
-    const now = new Date();
-    el.textContent = 'Current Time: ' + getDateTimeRepresentation(now);
-    setTimeout(updateCurrentTime, 1000);
-}
-
-function calculateTimer(date1, date2) {
-    const diff = date2 - date1;
-    let seconds = Math.floor(diff / 1000);
-    let minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    seconds %= 60;
-    minutes %= 60;
-    return {
-        "hours": hours, "seconds": seconds, "minutes": minutes
-    }
-}
-
 
 function updateOpenTimer(wasOpen, periodic = true) {
-    let result = isOpen();
-    if (result['open'] === true && wasOpen === false) {
-        onBecameOpen()
-    }
-    if (result['open'] === false && wasOpen === true) {
-        onBecameClosed()
-    }
-    if (result['open'] === false) {
-        let willOpenAt = result['willOpenAt']
-        const el = document.getElementById('open_timer');
-
-        let calculation = calculateTimer(new Date(), willOpenAt);
-        const [seconds, minutes, hours] = [calculation['seconds'], calculation['minutes'], calculation['hours']]
-
-        el.innerHTML = 'Will open at: ' + getDateTimeRepresentation(willOpenAt) + '<br/>Time left: ' + getTimerRepresentation(hours, minutes, seconds);
-    }
-
-    if (periodic === true) {
-        setTimeout(function () {
-            updateOpenTimer(result['open'], true)
-        }, 1000);
-    }
-
-
+    return baseUpdateOpenTimer(wasOpen, isOpen, onBecameOpen, onBecameClosed, onKeptClosed, periodic)
 }
 
 function onSessionExpire() {
@@ -111,26 +46,19 @@ function onSessionExpire() {
     }
 }
 
+function onKeptClosed(result) {
+    let willOpenAt = result['willOpenAt']
+    const el = document.getElementById('open_timer');
 
-function updateSessionTimer() {
-    const session = getSession()
-    if (session === null || session['endsAt'] < new Date()) {
-        onSessionExpire()
-        return
-    }
-    const el = document.getElementById('session_timer');
-
-
-    let calculation = calculateTimer(new Date(), session['endsAt']);
+    let calculation = calculateTimer(new Date(), willOpenAt);
     const [seconds, minutes, hours] = [calculation['seconds'], calculation['minutes'], calculation['hours']]
 
-    el.innerHTML = 'Session ends at: ' + getDateTimeRepresentation(session['endsAt']) + '<br/>Time left: ' + getTimerRepresentation(hours, minutes, seconds);
-    setTimeout(updateSessionTimer, 1000);
+    el.innerHTML = 'Will open at: ' + getDateTimeRepresentation(willOpenAt) + '<br/>Time left: ' + getTimerRepresentation(hours, minutes, seconds);
 }
 
 
 window.addEventListener('load', function () {
-    updateCurrentTime();
+    updateCurrentTime('current_time');
 });
 
 window.addEventListener('load', function () {
@@ -180,7 +108,7 @@ function setRegFormResult(result) {
 }
 
 function onGeolocationShareSuccess(result, context) {
-    let session = startSession(context)
+    let session = startSession(context['expiration'], context['firstName'], context['lastName'], context['budget'])
     onLogin(session)
 }
 
@@ -189,15 +117,15 @@ function onLogin(session) {
     if (!(session['preferredColor'] === null)) {
         changeColor(session['preferredColor'])
     }
-    showProfile(session)
+    showProfile(session['firstName'], session['lastName'], session['sessionCount'], session['budget'])
     showElementById('wrapper__change_color')
-    console.log(getPlatform())
-    console.log(getBrowser())
-    console.log(getWindowSize())
-    console.log(getResolution())
-    console.log(getLanguage())
+    console.log('Platform: ', getPlatform())
+    console.log('Browser: ', getBrowser())
+    console.log('Window size: ', getWindowSize())
+    console.log('Resolution: ', getResolution())
+    console.log('Language: ', getLanguage())
     showElementById('wrapper__session_timer')
-    updateSessionTimer()
+    updateSessionTimer(getSession, onSessionExpire, 'session_timer')
 }
 
 function onGeolocationShareError(err, context) {
@@ -205,7 +133,7 @@ function onGeolocationShareError(err, context) {
 }
 
 
-function loginStart(context) {
+function startLogin(context) {
     getGeolocation(function (result) {
         onGeolocationShareSuccess(result, context)
     }, function (err) {
@@ -214,20 +142,20 @@ function loginStart(context) {
 }
 
 function logout() {
-    hideElementById('wrapper__profile')
-    hideElementById('wrapper__session_timer')
-    hideElementById('wrapper__change_color')
+    hideProfile('wrapper__profile', 'wrapper__session_timer', 'wrapper__change_color')
     endSession();
 }
 
 
-function startSession(context) {
-    return baseStartSession(context['expiration'], context['firstName'], context['lastName'], context['budget'])
+function changeColor(color) {
+    document.body.style.backgroundImage = 'none'
+    document.body.style.backgroundColor = color;
+    savePreferredColor(color)
 }
 
-function showProfile(session) {
-    let el = showElementById('wrapper__profile')
-    el.textContent = `Hej ${generateUsername(session['firstName'], session['lastName'])}! Sessions count: ${session['sessionCount']} Current budget: ${session['budget']}`
+function onColorChange() {
+    let color = document.getElementById('color_input').value
+    changeColor(color)
 }
 
 
@@ -264,7 +192,7 @@ function submitRegForm() {
         return false;
     }
 
-    loginStart({
+    startLogin({
         "expiration": sessionLength,
         "firstName": firstName,
         "lastName": lastName,
@@ -273,15 +201,4 @@ function submitRegForm() {
     });
 
     return false;
-}
-
-function changeColor(color) {
-    document.body.style.backgroundImage = 'none'
-    document.body.style.backgroundColor = color;
-    savePreferredColor(color)
-}
-
-function onColorChange() {
-    let color = document.getElementById('color_input').value
-    changeColor(color)
 }

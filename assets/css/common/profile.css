@@ -1,0 +1,48 @@
+.wrapper__current_time {
+    background-color: white;
+    padding: 30px;
+    margin-bottom: 10px;
+}
+
+#session_length_selector {
+    width: 100%;
+}
+
+.wrapper__session_timer {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.wrapper__session_timer p {
+    margin: auto;
+}
+
+#wrapper__session_timer {
+    display: none;
+}
+
+
+.wrapper__profile {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#wrapper__profile {
+    display: none;
+}
+
+.wrapper__change_color {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#wrapper__change_color {
+    display: none;
+    margin-bottom: auto;
+}

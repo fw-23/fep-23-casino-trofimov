@@ -1,4 +1,5 @@
 @import "base.css";
+@import "common/profile.css";
 
 .wrapper p {
     margin: 0 0 2em 0;
